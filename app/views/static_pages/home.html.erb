@@ -1,26 +1,28 @@
-<% provide(:title, 'Home') %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Ruby on Rails Tutorial Sample App | <%= yield(:title) %></title>
-</head>
-<body>
-<h1>Sample App</h1>
-<p>
-  This is the home page for the
-  <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
-  sample application.
-</p>
-<div class="center hero-unit">
-  <h1>Welcome to the Sample App</h1>
-  <h2>
-    This is the home page for the
-    <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
-</div>
-<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
-</body>
-
-</html>
+<% if signed_in? %>
+    <div class="row">
+      <aside class="span4">
+        <section>
+          <%= render 'shared/user_info' %>
+        </section>
+        <section>
+          <%= render 'shared/micropost_form' %>
+        </section>
+      </aside>
+      <div class="span8">
+      <h3>发布的帖子</h3>
+      <%= render 'shared/feed' %>
+    </div>
+    </div>
+<% else %>
+    <div class="center hero-unit">
+      <h1>欢迎来到XX论坛</h1>
+      <h2>
+        这个论坛是基于rails开发的
+        <a href="http://railstutorial.org/">Ruby on Rails 指南</a>
+        简单例子
+      </h2>
+      <%= link_to "现在注册!", signup_path,
+                  class: "btn btn-large btn-primary" %>
+    </div>
+    <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+<% end %>
